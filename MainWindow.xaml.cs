@@ -23,6 +23,7 @@ namespace RestaurantPrg
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new Menu();
         }
     }
 }
