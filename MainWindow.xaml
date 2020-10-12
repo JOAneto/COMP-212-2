@@ -29,15 +29,15 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="Appetizers" Padding="10" TextAlignment="Center"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="Appetizer" Padding="10" TextAlignment="Center"/>
         <ComboBox Grid.Column="1" Grid.Row="2"/>
-        <TextBlock Grid.Column="3" Grid.Row="1" Text="Desserts" Padding="10" TextAlignment="Center"/>
+        <TextBlock Grid.Column="3" Grid.Row="1" Text="Dessert" Padding="10" TextAlignment="Center"/>
         <ComboBox Grid.Column="3" Grid.Row="2" />
         <TextBlock Grid.Column="1" Grid.Row="3" Text="Main" Padding="10" TextAlignment="Center"/>
         <ComboBox Grid.Column="1" Grid.Row="4" />
         <TextBlock Grid.Column="3" Grid.Row="3" Text="Beverage" Padding="10" TextAlignment="Center"/>
         <ComboBox Grid.Column="3" Grid.Row="4" />
-        <Button Grid.Column="1" Grid.Row="6" Content="Clear bill"/>
+        <Button Grid.Column="1" Grid.Row="6" Content="Clear bill" Grid.ColumnSpan="3"/>
         <DataGrid Grid.Column="5" Grid.Row="1" Grid.RowSpan="7" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>
