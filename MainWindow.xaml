@@ -5,8 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RestaurantPrg"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        FontSize="18"
+        Title="Team 7 Barbecue &amp; Grill" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="Appetizers" Padding="10" TextAlignment="Center"/>
+        <ComboBox Grid.Column="1" Grid.Row="2"/>
+        <TextBlock Grid.Column="3" Grid.Row="1" Text="Desserts" Padding="10" TextAlignment="Center"/>
+        <ComboBox Grid.Column="3" Grid.Row="2" />
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="Main" Padding="10" TextAlignment="Center"/>
+        <ComboBox Grid.Column="1" Grid.Row="4" />
+        <TextBlock Grid.Column="3" Grid.Row="3" Text="Beverage" Padding="10" TextAlignment="Center"/>
+        <ComboBox Grid.Column="3" Grid.Row="4" />
+        <Button Grid.Column="1" Grid.Row="6" Content="Clear bill"/>
+        <DataGrid Grid.Column="5" Grid.Row="1" Grid.RowSpan="7" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>
