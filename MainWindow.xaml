@@ -6,8 +6,15 @@
         xmlns:local="clr-namespace:RestaurantPrg"
         mc:Ignorable="d"
         FontSize="18"
-        Title="Team 7 Barbecue &amp; Grill" Height="450" Width="800">
-    <Grid> 
+        Title="Team 7 Barbecue &amp; Grill" Height="450" Width="800" ResizeMode="NoResize">
+    <Grid Margin="0,0,0,-6.5">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="#FF604A79"/>
+                <GradientStop Color="#FFB92B27" Offset="1"/>
+                <GradientStop Color="#FF1565C0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
             <ColumnDefinition Width="auto" />
@@ -30,23 +37,37 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="Appetizer" Padding="10" TextAlignment="Center"/>
-        <ComboBox x:Name="app" Grid.Column="1" Grid.Row="2" DropDownClosed="App_DropDownClosed"  />
-        <TextBlock Grid.Column="3" Grid.Row="1" Text="Dessert" Padding="10" TextAlignment="Center"/>
-        <ComboBox x:Name="des" Grid.Column="3" Grid.Row="2" DropDownClosed="Des_DropDownClosed" />
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="Main" Padding="10" TextAlignment="Center"/>
-        <ComboBox x:Name="main" Grid.Column="1" Grid.Row="4" DropDownClosed="Main_DropDownClosed" />
-        <TextBlock Grid.Column="3" Grid.Row="3" Text="Beverage" Padding="10" TextAlignment="Center"/>
-        <ComboBox x:Name="bev" Grid.Column="3" Grid.Row="4" DropDownClosed="Bev_DropDownClosed" />
-        <TextBlock x:Name="total" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="$0" Padding="10" TextAlignment="Center" />
-        <Button x:Name="clearBtn" Grid.Column="1" Grid.Row="7" Content="Clear bill" Grid.ColumnSpan="3"/>
-        <DataGrid x:Name="Bill" Grid.Column="5" Grid.Row="1" Grid.RowSpan="7" Grid.ColumnSpan="2">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Order" Width="auto" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Price" Width="auto" Binding="{Binding Price}"/>
-                <DataGridTextColumn Header="Quantity" Width="auto" Binding="{Binding Quantity}" />
-                <DataGridTextColumn Header="Dish" Width="auto" Binding="{Binding FoodType}" />
-            </DataGrid.Columns>
+        <TextBlock Grid.Column="6" Grid.Row="1" Text="Appetizer" Padding="10" TextAlignment="Center" Margin="10,0,556,0" RenderTransformOrigin="0.31,0.506" FontWeight="Bold" FontSize="22"/>
+        <ComboBox x:Name="app" Grid.Column="6" Grid.Row="2" DropDownClosed="App_DropDownClosed" Margin="10,0,556,0"  />
+        <TextBlock Grid.Column="6" Grid.Row="1" Text="Dessert" Padding="10" TextAlignment="Center" Margin="552,0,10,0" FontSize="22" FontWeight="Bold"/>
+        <ComboBox x:Name="des" Grid.Column="6" Grid.Row="2" DropDownClosed="Des_DropDownClosed" Margin="552,0,10,0" />
+        <TextBlock Grid.Column="6" Grid.Row="1" Text="Main" Padding="10" TextAlignment="Center" RenderTransformOrigin="0.941,-0.145" Margin="192,0,374,0" FontSize="22" FontWeight="Bold"/>
+        <ComboBox x:Name="main" Grid.Column="6" Grid.Row="2" DropDownClosed="Main_DropDownClosed" RenderTransformOrigin="1.819,-1.728" Margin="192,0,374,0" SelectionChanged="main_SelectionChanged" />
+        <TextBlock Grid.Column="6" Text="Beverage" Padding="10" TextAlignment="Center" RenderTransformOrigin="0.877,-0.245" Margin="373,0,189,0" Grid.Row="1" FontSize="22" FontWeight="Bold"/>
+        <ComboBox x:Name="bev" Grid.Column="6" Grid.Row="2" DropDownClosed="Bev_DropDownClosed" RenderTransformOrigin="0.594,-1.728" Margin="373,0,189,0" />
+        <TextBlock x:Name="total" Grid.Column="6" Grid.Row="8" Text="$0" Padding="10" TextAlignment="Center" Margin="552,226.5,0,10.5" FontWeight="Bold" FontSize="22" Background="#FFA6A6A6" />
+        <Button x:Name="clearBtn" Grid.Column="6" Grid.Row="8" Content="Clear Bill" Margin="585,0.5,42,255" Background="#FFF1CECE" FontWeight="Bold" RenderTransformOrigin="0.45,-0.075"/>
+        <TextBlock Grid.Column="6" Grid.Row="8" Text="Total Bill:" Padding="10" TextAlignment="Center" Margin="547,183.5,0,56.5" FontWeight="Bold" FontSize="22"/>
+        <DataGrid x:Name="Bill" Grid.Column="5" Grid.Row="6" Grid.RowSpan="3" Grid.ColumnSpan="2" Margin="10,0.5,188,10.5" SelectionChanged="Bill_SelectionChanged">
+
+
         </DataGrid>
+        <StatusBar  Height="18"  Grid.Row="9"  Width="795" Grid.ColumnSpan="8">
+            <StatusBarItem HorizontalAlignment="Right" Visibility="{Binding InfoIconVisibilty}" Width="657">
+                <Button IsTabStop="False" Command="{Binding HideInfoIconCommand}" Click="Button_Click" Width="664" Height="18">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Image Source="http://centennialcollegepress.com/wp-content/uploads/2014/11/ccpress-logo.png" Height="18" Width="664" ToolTip="Centennial college" RenderTransformOrigin="-12.2,0.681"></Image>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StatusBarItem>
+
+        </StatusBar>
+        <TextBlock x:Name="total_Copy" Grid.Column="6" Grid.Row="8" Text="$0" Padding="10" TextAlignment="Center" Margin="552,70.5,0,178" FontWeight="Bold" FontSize="18" Background="#FFA6A6A6" />
+        <TextBlock Grid.Column="6" Grid.Row="8" Text="Subtotal:" Padding="10" TextAlignment="Center" Margin="553,30.5,19,214" FontWeight="Bold" FontSize="18" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="total_Copy1" Grid.Column="6" Grid.Row="8" Text="$0" Padding="10" TextAlignment="Center" Margin="552,142.5,0,106" FontWeight="Bold" FontSize="18" Background="#FFA6A6A6" />
+        <TextBlock Grid.Column="6" Grid.Row="8" Text="Tax:" Padding="10" TextAlignment="Center" Margin="552,104.5,0,135" FontWeight="Bold" FontSize="18"/>
+
     </Grid>
 </Window>

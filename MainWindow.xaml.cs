@@ -1,19 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using Caliburn.Micro;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RestaurantPrg
 {
@@ -23,6 +12,7 @@ namespace RestaurantPrg
     public partial class MainWindow : Window
     {
         private ObservableCollection<Menu> foodMenu;
+        private ObservableCollection<Menu> dataGrid = new ObservableCollection<Menu>();
         public double Total = 0;
         enum FoodTypes
         {
@@ -36,7 +26,9 @@ namespace RestaurantPrg
         {
             InitializeComponent();
             LoadData();
-            
+            Bill.ItemsSource = dataGrid;
+            Bill.CanUserAddRows = false;
+
         }
 
         public void LoadData()
@@ -44,7 +36,7 @@ namespace RestaurantPrg
             // ** Load menu list to ObservableCollection
             foodMenu = new ObservableCollection<Menu>()
             {
-                new Menu() { Name = "Buffalo Wings", Price = 5.95, FoodType = "Appetizer" },
+                new Menu() { Name = "Buffalo Wings", Price = 5.95, FoodType = "Appetizer",  },
                 new Menu() { Name = "Buffalo Fingers", Price = 6.95, FoodType = "Appetizer" },
                 new Menu() { Name = "Potato Skins", Price = 8.95, FoodType = "Appetizer" },
                 new Menu() { Name = "Nachos", Price = 8.95, FoodType = "Appetizer" },
@@ -136,29 +128,109 @@ namespace RestaurantPrg
         private void App_DropDownClosed(object sender, EventArgs e)
         {
             Menu price = foodMenu.FirstOrDefault(r => r.Name == app.Text);
-            Bill.Items.Add(new Menu() { Name = app.Text, FoodType = "Appetizer", Price = price.Price, Quantity = 1 });
+
+            Console.WriteLine(dataGrid.Any(p => p.Name == app.Text));
+
+            if (dataGrid.Any(p => p.Name == app.Text))
+            {
+                Console.WriteLine("here");
+                Menu found = dataGrid.FirstOrDefault(x => x.Name == app.Text);
+                int i = dataGrid.IndexOf(found);
+                dataGrid[i].Quantity++;
+                Console.WriteLine(dataGrid[i].Quantity);
+
+            }
+            else
+            {
+                dataGrid.Add(new Menu() { Name = app.Text, FoodType = "Appetizer", Price = price.Price, Quantity = 1 });
+            }
             handleTotal(price);
         }
-
+        // <DataGrid.Columns>
+        //    <DataGridTextColumn Header = "Name" Width="auto" Binding="{Binding Name}"/>
+        //   <DataGridTextColumn Header = "Price" Width="auto" Binding="{Binding Price}"/>
+        //     <DataGridTextColumn Header = "Quantity" Width="auto" Binding="{Binding Quantity}" />
+        //    <DataGridTextColumn Header = "Category" Width="auto" Binding="{Binding FoodType}" />
+        //  </DataGrid.Columns>
         private void Des_DropDownClosed(object sender, EventArgs e)
         {
             Menu price = foodMenu.FirstOrDefault(r => r.Name == des.Text);
-            Bill.Items.Add(new Menu() { Name = des.Text, FoodType = "Dessert", Price = price.Price, Quantity = 1 });
+            // Bill.Items.Add(new Menu() { Name = des.Text, FoodType = "Dessert", Price = price.Price, Quantity = 1 });
+            if (dataGrid.Any(p => p.Name == des.Text))
+            {
+                Console.WriteLine("here");
+                Menu found = dataGrid.FirstOrDefault(x => x.Name == des.Text);
+                int i = dataGrid.IndexOf(found);
+                dataGrid[i].Quantity++;
+                Console.WriteLine(dataGrid[i].Quantity);
+
+            }
+            else
+            {
+                dataGrid.Add(new Menu() { Name = des.Text, FoodType = "Dessert", Price = price.Price, Quantity = 1 });
+
+            }
             handleTotal(price);
         }
 
         private void Main_DropDownClosed(object sender, EventArgs e)
         {
             Menu price = foodMenu.FirstOrDefault(r => r.Name == main.Text);
-            Bill.Items.Add(new Menu() { Name = main.Text, FoodType = "Main Course", Price = price.Price, Quantity = 1 });
+            //Bill.Items.Add(new Menu() { Name = main.Text, FoodType = "Main Course", Price = price.Price, Quantity = 1 });
+            Console.WriteLine(dataGrid.Any(p => p.Name == main.Text));
+
+            if (dataGrid.Any(p => p.Name == main.Text))
+            {
+
+                Menu found = dataGrid.FirstOrDefault(x => x.Name == main.Text);
+                int i = dataGrid.IndexOf(found);
+                dataGrid[i].Quantity++;
+                Console.WriteLine(dataGrid[i].Quantity);
+
+            }
+            else
+            {
+                dataGrid.Add(new Menu() { Name = main.Text, FoodType = "Main Course", Price = price.Price, Quantity = 1 });
+            }
             handleTotal(price);
         }
 
         private void Bev_DropDownClosed(object sender, EventArgs e)
         {
             Menu price = foodMenu.FirstOrDefault(r => r.Name == bev.Text);
-            Bill.Items.Add(new Menu() { Name = bev.Text, FoodType = "Beverage", Price = price.Price, Quantity = 1 });
+            // Bill.Items.Add(new Menu() { Name = bev.Text, FoodType = "Beverage", Price = price.Price, Quantity = 1 });
+            Console.WriteLine(dataGrid.Any(p => p.Name == bev.Text));
+
+            if (dataGrid.Any(p => p.Name == bev.Text))
+            {
+                Console.WriteLine("here");
+                Menu found = dataGrid.FirstOrDefault(x => x.Name == bev.Text);
+                int i = dataGrid.IndexOf(found);
+                dataGrid[i].Quantity++;
+                Console.WriteLine(dataGrid[i].Quantity);
+
+            }
+            else
+            {
+
+                dataGrid.Add(new Menu() { Name = bev.Text, FoodType = "Beverage", Price = price.Price, Quantity = 1 });
+            }
             handleTotal(price);
+        }
+
+        private void Bill_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Console.WriteLine(Bill.SelectedCells);
+        }
+
+        private void main_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.centennialcollege.ca");
         }
     }
 }
