@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using Caliburn.Micro;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -22,7 +23,7 @@ namespace RestaurantPrg
     public partial class MainWindow : Window
     {
         private ObservableCollection<Menu> foodMenu;
-
+        public double Total = 0;
         enum FoodTypes
         {
             Appetizer,
@@ -126,6 +127,38 @@ namespace RestaurantPrg
             {
                 des.Items.Add(f.Name);
             }
+        }
+        public void handleTotal(Menu input)
+        {
+            Total = Total + input.Price;
+            total.Text = "$" + Total;
+        }
+        private void App_DropDownClosed(object sender, EventArgs e)
+        {
+            Menu price = foodMenu.FirstOrDefault(r => r.Name == app.Text);
+            Bill.Items.Add(new Menu() { Name = app.Text, FoodType = "Appetizer", Price = price.Price, Quantity = 1 });
+            handleTotal(price);
+        }
+
+        private void Des_DropDownClosed(object sender, EventArgs e)
+        {
+            Menu price = foodMenu.FirstOrDefault(r => r.Name == des.Text);
+            Bill.Items.Add(new Menu() { Name = des.Text, FoodType = "Dessert", Price = price.Price, Quantity = 1 });
+            handleTotal(price);
+        }
+
+        private void Main_DropDownClosed(object sender, EventArgs e)
+        {
+            Menu price = foodMenu.FirstOrDefault(r => r.Name == main.Text);
+            Bill.Items.Add(new Menu() { Name = main.Text, FoodType = "Main Course", Price = price.Price, Quantity = 1 });
+            handleTotal(price);
+        }
+
+        private void Bev_DropDownClosed(object sender, EventArgs e)
+        {
+            Menu price = foodMenu.FirstOrDefault(r => r.Name == bev.Text);
+            Bill.Items.Add(new Menu() { Name = bev.Text, FoodType = "Beverage", Price = price.Price, Quantity = 1 });
+            handleTotal(price);
         }
     }
 }

@@ -25,19 +25,28 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="20" />
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="1" Grid.Row="1" Text="Appetizer" Padding="10" TextAlignment="Center"/>
-        <ComboBox x:Name="app" Grid.Column="1" Grid.Row="2"  />
+        <ComboBox x:Name="app" Grid.Column="1" Grid.Row="2" DropDownClosed="App_DropDownClosed"  />
         <TextBlock Grid.Column="3" Grid.Row="1" Text="Dessert" Padding="10" TextAlignment="Center"/>
-        <ComboBox x:Name="des" Grid.Column="3" Grid.Row="2" />
+        <ComboBox x:Name="des" Grid.Column="3" Grid.Row="2" DropDownClosed="Des_DropDownClosed" />
         <TextBlock Grid.Column="1" Grid.Row="3" Text="Main" Padding="10" TextAlignment="Center"/>
-        <ComboBox x:Name="main" Grid.Column="1" Grid.Row="4" />
+        <ComboBox x:Name="main" Grid.Column="1" Grid.Row="4" DropDownClosed="Main_DropDownClosed" />
         <TextBlock Grid.Column="3" Grid.Row="3" Text="Beverage" Padding="10" TextAlignment="Center"/>
-        <ComboBox x:Name="bev" Grid.Column="3" Grid.Row="4" />
-        <Button x:Name="clearBtn" Grid.Column="1" Grid.Row="6" Content="Clear bill" Grid.ColumnSpan="3"/>
-        <DataGrid Grid.Column="5" Grid.Row="1" Grid.RowSpan="7" Grid.ColumnSpan="2"/>
+        <ComboBox x:Name="bev" Grid.Column="3" Grid.Row="4" DropDownClosed="Bev_DropDownClosed" />
+        <TextBlock x:Name="total" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="$0" Padding="10" TextAlignment="Center" />
+        <Button x:Name="clearBtn" Grid.Column="1" Grid.Row="7" Content="Clear bill" Grid.ColumnSpan="3"/>
+        <DataGrid x:Name="Bill" Grid.Column="5" Grid.Row="1" Grid.RowSpan="7" Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Order" Width="auto" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Price" Width="auto" Binding="{Binding Price}"/>
+                <DataGridTextColumn Header="Quantity" Width="auto" Binding="{Binding Quantity}" />
+                <DataGridTextColumn Header="Dish" Width="auto" Binding="{Binding FoodType}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
