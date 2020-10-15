@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace RestaurantPrg
 {
@@ -24,6 +25,7 @@ namespace RestaurantPrg
     {
         private ObservableCollection<Menu> foodMenu;
         public double Total = 0;
+        private const string COLLEGE_URL = "https://www.centennialcollege.ca/";
         enum FoodTypes
         {
             Appetizer,
@@ -159,6 +161,11 @@ namespace RestaurantPrg
             Menu price = foodMenu.FirstOrDefault(r => r.Name == bev.Text);
             Bill.Items.Add(new Menu() { Name = bev.Text, FoodType = "Beverage", Price = price.Price, Quantity = 1 });
             handleTotal(price);
+        }
+
+        private void Link_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(COLLEGE_URL);
         }
     }
 }

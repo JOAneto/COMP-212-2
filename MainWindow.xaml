@@ -37,7 +37,7 @@
         <TextBlock Grid.Column="1" Grid.Row="3" Text="Main" Padding="10" TextAlignment="Center"/>
         <ComboBox x:Name="main" Grid.Column="1" Grid.Row="4" DropDownClosed="Main_DropDownClosed" />
         <TextBlock Grid.Column="3" Grid.Row="3" Text="Beverage" Padding="10" TextAlignment="Center"/>
-        <ComboBox x:Name="bev" Grid.Column="3" Grid.Row="4" DropDownClosed="Bev_DropDownClosed" />
+        <ComboBox x:Name="bev" Grid.Column="3" Grid.Row="4" DropDownClosed="Bev_DropDownClosed"  />
         <TextBlock x:Name="total" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="$0" Padding="10" TextAlignment="Center" />
         <Button x:Name="clearBtn" Grid.Column="1" Grid.Row="7" Content="Clear bill" Grid.ColumnSpan="3"/>
         <DataGrid x:Name="Bill" Grid.Column="5" Grid.Row="1" Grid.RowSpan="7" Grid.ColumnSpan="2">
@@ -48,5 +48,14 @@
                 <DataGridTextColumn Header="Dish" Width="auto" Binding="{Binding FoodType}" />
             </DataGrid.Columns>
         </DataGrid>
+        <StatusBar Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="6" Height="40" VerticalAlignment="Bottom">
+            <StatusBarItem Content="Group 7" FontSize="20" Foreground="Blue"/>
+            <Button x:Name="Link" Click="Link_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="CentennialCollegeLogo.jpg" Stretch="Uniform"/>
+                </StackPanel>
+            </Button>
+                    
+        </StatusBar>
     </Grid>
 </Window>
