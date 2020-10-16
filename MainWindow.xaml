@@ -17,6 +17,7 @@
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
@@ -29,6 +30,8 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="1" Grid.Row="1" Text="Appetizer" Padding="10" TextAlignment="Center"/>
         <ComboBox x:Name="app" Grid.Column="1" Grid.Row="2" DropDownClosed="App_DropDownClosed"  />
@@ -37,9 +40,13 @@
         <TextBlock Grid.Column="1" Grid.Row="3" Text="Main" Padding="10" TextAlignment="Center"/>
         <ComboBox x:Name="main" Grid.Column="1" Grid.Row="4" DropDownClosed="Main_DropDownClosed" />
         <TextBlock Grid.Column="3" Grid.Row="3" Text="Beverage" Padding="10" TextAlignment="Center"/>
-        <ComboBox x:Name="bev" Grid.Column="3" Grid.Row="4" DropDownClosed="Bev_DropDownClosed"  />
-        <TextBlock x:Name="total" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="$0" Padding="10" TextAlignment="Center" />
-        <Button x:Name="clearBtn" Grid.Column="1" Grid.Row="7" Content="Clear bill" Grid.ColumnSpan="3"/>
+        <TextBlock x:Name="txtTax" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="Tax" Padding="10" TextAlignment="Left" />
+        <TextBlock x:Name="tax" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="$0" Padding="10" TextAlignment="Center" />
+        <TextBlock x:Name="txtTotal" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Text="Total: " Padding="10" TextAlignment="Left" />
+        <TextBlock x:Name="total" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Text="$0" Padding="10" TextAlignment="Center" />
+
+        <Button x:Name="clearBtn" Grid.Column="1" Grid.Row="8" Content="Clear bill" Grid.ColumnSpan="3"/>
+
         <DataGrid x:Name="Bill" Grid.Column="5" Grid.Row="1" Grid.RowSpan="7" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Order" Width="auto" Binding="{Binding Name}"/>
@@ -48,14 +55,14 @@
                 <DataGridTextColumn Header="Dish" Width="auto" Binding="{Binding FoodType}" />
             </DataGrid.Columns>
         </DataGrid>
-        <StatusBar Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="6" Height="40" VerticalAlignment="Bottom">
+        <StatusBar Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="6" Height="40" VerticalAlignment="Bottom">
             <StatusBarItem Content="Group 7" FontSize="20" Foreground="Blue"/>
             <Button x:Name="Link" Click="Link_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="CentennialCollegeLogo.jpg" Stretch="Uniform"/>
                 </StackPanel>
             </Button>
-                    
+
         </StatusBar>
     </Grid>
 </Window>
