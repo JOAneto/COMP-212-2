@@ -40,6 +40,7 @@
         <TextBlock Grid.Column="1" Grid.Row="3" Text="Main" Padding="10" TextAlignment="Center"/>
         <ComboBox x:Name="main" Grid.Column="1" Grid.Row="4" DropDownClosed="Main_DropDownClosed" />
         <TextBlock Grid.Column="3" Grid.Row="3" Text="Beverage" Padding="10" TextAlignment="Center"/>
+        <ComboBox x:Name="bev" Grid.Column="3" Grid.Row="4" DropDownClosed="Bev_DropDownClosed" />
         <TextBlock x:Name="txtTax" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="Tax" Padding="10" TextAlignment="Left" />
         <TextBlock x:Name="tax" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="$0" Padding="10" TextAlignment="Center" />
         <TextBlock x:Name="txtTotal" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Text="Total: " Padding="10" TextAlignment="Left" />
