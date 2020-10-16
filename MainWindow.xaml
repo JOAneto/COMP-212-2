@@ -4,9 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RestaurantPrg"
+        xmlns:staticData="clr-namespace:RestaurantPrg"
         mc:Ignorable="d"
         FontSize="18"
         Title="Team 7 Barbecue &amp; Grill" Height="450" Width="800">
+    <Window.Resources>
+        <staticData:quantity x:Key="quantity"/>
+    </Window.Resources>
     <Grid> 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
@@ -42,17 +46,28 @@
         <TextBlock Grid.Column="3" Grid.Row="3" Text="Beverage" Padding="10" TextAlignment="Center"/>
         <ComboBox x:Name="bev" Grid.Column="3" Grid.Row="4" DropDownClosed="Bev_DropDownClosed" />
         <TextBlock x:Name="txtTax" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="Tax" Padding="10" TextAlignment="Left" />
-        <TextBlock x:Name="tax" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="$0" Padding="10" TextAlignment="Center" />
+        <TextBlock x:Name="taxText" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="$0" Padding="10" TextAlignment="Center" />
         <TextBlock x:Name="txtTotal" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Text="Total: " Padding="10" TextAlignment="Left" />
         <TextBlock x:Name="total" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Text="$0" Padding="10" TextAlignment="Center" />
 
         <Button x:Name="clearBtn" Grid.Column="1" Grid.Row="8" Content="Clear bill" Grid.ColumnSpan="3"/>
 
-        <DataGrid x:Name="Bill" Grid.Column="5" Grid.Row="1" Grid.RowSpan="7" Grid.ColumnSpan="2">
+        <DataGrid AutoGenerateColumns="False" x:Name="Bill" Grid.Column="5" Grid.Row="1" Grid.RowSpan="7" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Order" Width="auto" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Price" Width="auto" Binding="{Binding Price}"/>
-                <DataGridTextColumn Header="Quantity" Width="auto" Binding="{Binding Quantity}" />
+              <DataGridTemplateColumn Header="Quantity">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Quantity}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox x:Name="cb1" Width="auto" ItemsSource="{StaticResource quantity}" SelectedItem="{Binding Quantity}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Dish" Width="auto" Binding="{Binding FoodType}" />
             </DataGrid.Columns>
         </DataGrid>

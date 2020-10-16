@@ -24,7 +24,9 @@ namespace RestaurantPrg
     public partial class MainWindow : Window
     {
         private ObservableCollection<Menu> foodMenu;
+        public ObservableCollection<Menu> billMenu = new ObservableCollection<Menu>() { };
         public double Total = 0;
+        public double tax = 0.13;
         private const string COLLEGE_URL = "https://www.centennialcollege.ca/";
         enum FoodTypes
         {
@@ -38,6 +40,7 @@ namespace RestaurantPrg
         {
             InitializeComponent();
             LoadData();
+            Bill.ItemsSource = billMenu;
             
         }
 
@@ -46,36 +49,36 @@ namespace RestaurantPrg
             // ** Load menu list to ObservableCollection
             foodMenu = new ObservableCollection<Menu>()
             {
-                new Menu() { Name = "Buffalo Wings", Price = 5.95, FoodType = "Appetizer" },
-                new Menu() { Name = "Buffalo Fingers", Price = 6.95, FoodType = "Appetizer" },
-                new Menu() { Name = "Potato Skins", Price = 8.95, FoodType = "Appetizer" },
-                new Menu() { Name = "Nachos", Price = 8.95, FoodType = "Appetizer" },
-                new Menu() { Name = "Mushroom Caps", Price = 10.95, FoodType = "Appetizer" },
-                new Menu() { Name = "Shrimp Cocktail", Price = 12.95, FoodType = "Appetizer" },
-                new Menu() { Name = "Chips and Salsa", Price = 6.95, FoodType = "Appetizer" },
+                new Menu() { Name = "Buffalo Wings", Price = 5.95, FoodType = "Appetizer", Quantity =1 },
+                new Menu() { Name = "Buffalo Fingers", Price = 6.95, FoodType = "Appetizer", Quantity =1 },
+                new Menu() { Name = "Potato Skins", Price = 8.95, FoodType = "Appetizer", Quantity =1 },
+                new Menu() { Name = "Nachos", Price = 8.95, FoodType = "Appetizer", Quantity =1 },
+                new Menu() { Name = "Mushroom Caps", Price = 10.95, FoodType = "Appetizer", Quantity =1 },
+                new Menu() { Name = "Shrimp Cocktail", Price = 12.95, FoodType = "Appetizer", Quantity =1 },
+                new Menu() { Name = "Chips and Salsa", Price = 6.95, FoodType = "Appetizer", Quantity =1 },
 
-                new Menu() { Name = "Seafood Alfredo", Price = 15.95, FoodType = "MainCourse" },
-                new Menu() { Name = "Chicken Alfredo", Price = 13.95, FoodType = "MainCourse" },
-                new Menu() { Name = "Chicken Picatta", Price = 13.95, FoodType = "MainCourse" },
-                new Menu() { Name = "Turkey Club", Price = 11.95, FoodType = "MainCourse" },
-                new Menu() { Name = "Lobster Pie", Price = 19.95, FoodType = "MainCourse" },
-                new Menu() { Name = "Prime Rib", Price = 20.95, FoodType = "MainCourse" },
-                new Menu() { Name = "Shrimp Scampi", Price = 18.95, FoodType = "MainCourse" },
-                new Menu() { Name = "Turkey Dinner", Price = 13.95, FoodType = "MainCourse" },
-                new Menu() { Name = "Stuffed Chicken", Price = 14.95, FoodType = "MainCourse" },
+                new Menu() { Name = "Seafood Alfredo", Price = 15.95, FoodType = "MainCourse", Quantity =1 },
+                new Menu() { Name = "Chicken Alfredo", Price = 13.95, FoodType = "MainCourse", Quantity =1 },
+                new Menu() { Name = "Chicken Picatta", Price = 13.95, FoodType = "MainCourse", Quantity =1 },
+                new Menu() { Name = "Turkey Club", Price = 11.95, FoodType = "MainCourse", Quantity =1 },
+                new Menu() { Name = "Lobster Pie", Price = 19.95, FoodType = "MainCourse", Quantity =1 },
+                new Menu() { Name = "Prime Rib", Price = 20.95, FoodType = "MainCourse", Quantity =1 },
+                new Menu() { Name = "Shrimp Scampi", Price = 18.95, FoodType = "MainCourse", Quantity =1 },
+                new Menu() { Name = "Turkey Dinner", Price = 13.95, FoodType = "MainCourse", Quantity =1 },
+                new Menu() { Name = "Stuffed Chicken", Price = 14.95, FoodType = "MainCourse", Quantity =1 },
 
-                new Menu() { Name = "Soda", Price = 1.95, FoodType = "Beverage" },
-                new Menu() { Name = "Tea", Price = 1.50, FoodType = "Beverage" },
-                new Menu() { Name = "Coffee", Price = 1.25, FoodType = "Beverage" },
-                new Menu() { Name = "Mineral Water", Price = 2.95, FoodType = "Beverage" },
-                new Menu() { Name = "Juice", Price = 2.50, FoodType = "Beverage" },
-                new Menu() { Name = "Milk", Price = 1.50, FoodType = "Beverage" },
+                new Menu() { Name = "Soda", Price = 1.95, FoodType = "Beverage", Quantity =1 },
+                new Menu() { Name = "Tea", Price = 1.50, FoodType = "Beverage", Quantity =1 },
+                new Menu() { Name = "Coffee", Price = 1.25, FoodType = "Beverage", Quantity =1 },
+                new Menu() { Name = "Mineral Water", Price = 2.95, FoodType = "Beverage", Quantity =1 },
+                new Menu() { Name = "Juice", Price = 2.50, FoodType = "Beverage", Quantity =1 },
+                new Menu() { Name = "Milk", Price = 1.50, FoodType = "Beverage", Quantity =1 },
 
-                new Menu() { Name = "Apple Pie", Price = 5.95, FoodType = "Dessert" },
-                new Menu() { Name = "Sundae", Price = 3.95, FoodType = "Dessert" },
-                new Menu() { Name = "Carrot Cake", Price = 5.95, FoodType = "Dessert" },
-                new Menu() { Name = "Mud Pie", Price = 4.95, FoodType = "Dessert" },
-                new Menu() { Name = "Apple Crisp", Price = 5.95, FoodType = "Dessert" }
+                new Menu() { Name = "Apple Pie", Price = 5.95, FoodType = "Dessert", Quantity =1 },
+                new Menu() { Name = "Sundae", Price = 3.95, FoodType = "Dessert", Quantity =1 },
+                new Menu() { Name = "Carrot Cake", Price = 5.95, FoodType = "Dessert", Quantity =1 },
+                new Menu() { Name = "Mud Pie", Price = 4.95, FoodType = "Dessert", Quantity =1 },
+                new Menu() { Name = "Apple Crisp", Price = 5.95, FoodType = "Dessert", Quantity =1 }
             };
             // ** Load Appetizer list
             this.LoadAppetizers(foodMenu, Enum.GetName(typeof(FoodTypes), 0));
@@ -132,35 +135,54 @@ namespace RestaurantPrg
         }
         public void handleTotal(Menu input)
         {
-            Total = Total + input.Price;
+            double Tax = Math.Round(((Total - (Total * tax)) + (input.Price * input.Quantity)) * tax, 2);
+            Total = Math.Round(((Total - (Total*tax)) + (input.Price * input.Quantity)) + (((Total - (Total * tax)) + (input.Price * input.Quantity))*tax), 2);
             total.Text = "$" + Total;
+            taxText.Text = "$" + Tax;
         }
+        /*public void handleTotal(Menu input, double qn)
+        {
+            Total = Math.Round((Total / tax) + (((input.Price * qn) * tax) + (input.Price*qn)), 2);
+            total.Text = "$" + Total;
+        }*/
         private void App_DropDownClosed(object sender, EventArgs e)
         {
-            Menu price = foodMenu.FirstOrDefault(r => r.Name == app.Text);
-            Bill.Items.Add(new Menu() { Name = app.Text, FoodType = "Appetizer", Price = price.Price, Quantity = 1 });
-            handleTotal(price);
+            if (app.Text != "None")
+            {
+                Menu price = foodMenu.FirstOrDefault(r => r.Name == app.Text);
+                billMenu.Add(price);
+                handleTotal(price);
+            }
         }
 
         private void Des_DropDownClosed(object sender, EventArgs e)
         {
-            Menu price = foodMenu.FirstOrDefault(r => r.Name == des.Text);
-            Bill.Items.Add(new Menu() { Name = des.Text, FoodType = "Dessert", Price = price.Price, Quantity = 1 });
-            handleTotal(price);
+            if (des.Text != "None")
+            {
+                Menu price = foodMenu.FirstOrDefault(r => r.Name == des.Text);
+                billMenu.Add(price);
+                handleTotal(price);
+            }
         }
 
         private void Main_DropDownClosed(object sender, EventArgs e)
         {
-            Menu price = foodMenu.FirstOrDefault(r => r.Name == main.Text);
-            Bill.Items.Add(new Menu() { Name = main.Text, FoodType = "Main Course", Price = price.Price, Quantity = 1 });
-            handleTotal(price);
+            if (main.Text != "None")
+            {
+                Menu price = foodMenu.FirstOrDefault(r => r.Name == main.Text);
+                billMenu.Add(price);
+                handleTotal(price);
+            }
         }
 
         private void Bev_DropDownClosed(object sender, EventArgs e)
         {
-            Menu price = foodMenu.FirstOrDefault(r => r.Name == bev.Text);
-            Bill.Items.Add(new Menu() { Name = bev.Text, FoodType = "Beverage", Price = price.Price, Quantity = 1 });
-            handleTotal(price);
+            if (bev.Text != "None")
+            {
+                Menu price = foodMenu.FirstOrDefault(r => r.Name == bev.Text);
+                billMenu.Add(price);
+                handleTotal(price);
+            }
         }
 
         private void Link_Click(object sender, RoutedEventArgs e)
