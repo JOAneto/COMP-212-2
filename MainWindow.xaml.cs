@@ -189,5 +189,12 @@ namespace RestaurantPrg
         {
             Process.Start(COLLEGE_URL);
         }
+
+        private void ClearBtn_Click(object sender, RoutedEventArgs e)
+        {
+            billMenu.Clear();
+            total.Text = "$" + 0;
+            taxText.Text = "$" + 0;
+        }
     }
 }

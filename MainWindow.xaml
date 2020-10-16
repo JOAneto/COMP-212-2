@@ -50,12 +50,12 @@
         <TextBlock x:Name="txtTotal" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Text="Total: " Padding="10" TextAlignment="Left" />
         <TextBlock x:Name="total" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Text="$0" Padding="10" TextAlignment="Center" />
 
-        <Button x:Name="clearBtn" Grid.Column="1" Grid.Row="8" Content="Clear bill" Grid.ColumnSpan="3"/>
+        <Button x:Name="clearBtn" Grid.Column="1" Grid.Row="8" Content="Clear bill" Grid.ColumnSpan="3" Click="ClearBtn_Click"/>
 
         <DataGrid AutoGenerateColumns="False" x:Name="Bill" Grid.Column="5" Grid.Row="1" Grid.RowSpan="7" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Order" Width="auto" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Price" Width="auto" Binding="{Binding Price}"/>
+                <DataGridTextColumn Header="Price" Width="auto" Binding="{Binding Price, StringFormat={} {0:c}}"/>
               <DataGridTemplateColumn Header="Quantity">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

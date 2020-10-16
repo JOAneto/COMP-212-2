@@ -11,7 +11,7 @@ namespace RestaurantPrg
         {
             public quantity()
             {
-                Add(8);
+                Add(0);
                 Add(1);
                 Add(2);
                 Add(3);
