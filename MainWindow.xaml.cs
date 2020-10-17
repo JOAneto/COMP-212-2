@@ -145,43 +145,100 @@ namespace RestaurantPrg
             Total = Math.Round((Total / tax) + (((input.Price * qn) * tax) + (input.Price*qn)), 2);
             total.Text = "$" + Total;
         }*/
-        private void App_DropDownClosed(object sender, EventArgs e)
+       private void App_DropDownClosed(object sender, EventArgs e)
         {
             if (app.Text != "None")
             {
                 Menu price = foodMenu.FirstOrDefault(r => r.Name == app.Text);
-                billMenu.Add(price);
+                if (billMenu.Any(p => p.Name == app.Text))
+                {
+                    Console.WriteLine("here");
+                    Menu found = billMenu.FirstOrDefault(x => x.Name == app.Text);
+                    int i = billMenu.IndexOf(found);
+                    billMenu[i].Quantity++;
+                    Console.WriteLine(billMenu[i].Quantity);
+
+                }
+                else
+                {
+                    billMenu.Add(new Menu() { Name = app.Text, FoodType = "Appetizer", Price = price.Price, Quantity = 1 });
+                }
                 handleTotal(price);
+                //   Menu price = foodMenu.FirstOrDefault(r => r.Name == app.Text);
+                // billMenu.Add(price);
+
+
+                // handleTotal(price);
             }
         }
 
         private void Des_DropDownClosed(object sender, EventArgs e)
         {
+            Menu price = foodMenu.FirstOrDefault(r => r.Name == des.Text);
+
             if (des.Text != "None")
             {
-                Menu price = foodMenu.FirstOrDefault(r => r.Name == des.Text);
-                billMenu.Add(price);
+                if (billMenu.Any(p => p.Name == des.Text))
+                {
+                    Console.WriteLine("here");
+                    Menu found = billMenu.FirstOrDefault(x => x.Name == des.Text);
+                    int i = billMenu.IndexOf(found);
+                    billMenu[i].Quantity++;
+                    Console.WriteLine(billMenu[i].Quantity);
+
+                }
+                else
+                {
+                    billMenu.Add(new Menu() { Name = des.Text, FoodType = "Dessert", Price = price.Price, Quantity = 1 });
+
+                }
                 handleTotal(price);
             }
         }
 
         private void Main_DropDownClosed(object sender, EventArgs e)
         {
-            if (main.Text != "None")
+            Menu price = foodMenu.FirstOrDefault(r => r.Name == main.Text);
+
+            if (billMenu.Any(p => p.Name == main.Text))
             {
-                Menu price = foodMenu.FirstOrDefault(r => r.Name == main.Text);
-                billMenu.Add(price);
-                handleTotal(price);
+
+                Menu found = billMenu.FirstOrDefault(x => x.Name == main.Text);
+                int i = billMenu.IndexOf(found);
+                billMenu[i].Quantity++;
+                Console.WriteLine(billMenu[i].Quantity);
+
             }
+            else
+            {
+                billMenu.Add(new Menu() { Name = main.Text, FoodType = "Main Course", Price = price.Price, Quantity = 1 });
+            }
+            handleTotal(price);
         }
 
         private void Bev_DropDownClosed(object sender, EventArgs e)
         {
+            Menu price = foodMenu.FirstOrDefault(r => r.Name == bev.Text);
+
             if (bev.Text != "None")
             {
-                Menu price = foodMenu.FirstOrDefault(r => r.Name == bev.Text);
-                billMenu.Add(price);
+
+                if (billMenu.Any(p => p.Name == bev.Text))
+                {
+                    Console.WriteLine("here");
+                    Menu found = billMenu.FirstOrDefault(x => x.Name == bev.Text);
+                    int i = billMenu.IndexOf(found);
+                    billMenu[i].Quantity++;
+                    Console.WriteLine(billMenu[i].Quantity);
+
+                }
+                else
+                {
+
+                    billMenu.Add(new Menu() { Name = bev.Text, FoodType = "Beverage", Price = price.Price, Quantity = 1 });
+                }
                 handleTotal(price);
+
             }
         }
 
