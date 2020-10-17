@@ -21,7 +21,6 @@
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="20" />
-            <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
@@ -33,10 +32,10 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="20" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="1" Grid.Row="1" Text="Appetizer" Padding="10" TextAlignment="Center"/>
         <ComboBox x:Name="app" Grid.Column="1" Grid.Row="2" DropDownClosed="App_DropDownClosed"  />
@@ -46,35 +45,38 @@
         <ComboBox x:Name="main" Grid.Column="1" Grid.Row="4" DropDownClosed="Main_DropDownClosed" />
         <TextBlock Grid.Column="3" Grid.Row="3" Text="Beverage" Padding="10" TextAlignment="Center"/>
         <ComboBox x:Name="bev" Grid.Column="3" Grid.Row="4" DropDownClosed="Bev_DropDownClosed" />
-        <TextBlock x:Name="txtSubTot" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="Subtotal:" Padding="10" TextAlignment="Left" />
-        <TextBlock x:Name="SubTot" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="$0"  Padding="10" TextAlignment="Center" />
-        <TextBlock x:Name="txtTax" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Text="Tax:" Padding="10" TextAlignment="Left" />
-        <TextBlock x:Name="taxText" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Text="$0" Padding="10" TextAlignment="Center" />
-        <TextBlock x:Name="txtTotal" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="3" Text="Total: " Padding="10" TextAlignment="Left" />
-        <TextBlock x:Name="total" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="3" Text="$0" Padding="10" TextAlignment="Center" />
+        <TextBlock x:Name="txtSubTot" Grid.Column="1" Grid.Row="6" Text="Subtotal:" Padding="10" TextAlignment="Left" />
+        <TextBlock x:Name="SubTot" Grid.Column="3" Grid.Row="6" Text="$0"  Padding="10" TextAlignment="Center" />
+        <TextBlock x:Name="txtTax" Grid.Column="1" Grid.Row="7"  Text="Tax:" Padding="10" TextAlignment="Left" />
+        <TextBlock x:Name="taxText" Grid.Column="3" Grid.Row="7"  Text="$0" Padding="10" TextAlignment="Center" />
+        <TextBlock x:Name="txtTotal" Grid.Column="1" Grid.Row="8"  Text="Total: " Padding="10" TextAlignment="Left" />
+        <TextBlock x:Name="total" Grid.Column="3" Grid.Row="8" Text="$0" Padding="10" TextAlignment="Center" />
 
         <Button x:Name="clearBtn" Grid.Column="1" Grid.Row="9" Content="Clear bill" Grid.ColumnSpan="3" Click="ClearBtn_Click"/>
 
-        <DataGrid AutoGenerateColumns="False" x:Name="Bill" Grid.Column="5" Grid.Row="1" Grid.RowSpan="7" Grid.ColumnSpan="2">
+        <DataGrid AutoGenerateColumns="False" x:Name="Bill" Grid.Column="5" Grid.Row="1" Grid.RowSpan="7" Grid.ColumnSpan="2" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Order" Width="auto" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Price" Width="auto" Binding="{Binding Price, StringFormat={} {0:c}}"/>
-              <DataGridTemplateColumn Header="Quantity">
+                <DataGridTextColumn IsReadOnly="True" Header="Order" Width="auto" Binding="{Binding Name}"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Price" Width="auto" Binding="{Binding Price, StringFormat={} {0:c}}"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Quantity" Width="auto" Binding="{Binding Quantity}" />
+                <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Quantity}" />
+                            <Button Name="x1" Click="x1_Click" Content="+"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <ComboBox x:Name="cb1" Width="auto" ItemsSource="{StaticResource quantity}" SelectedItem="{Binding Quantity}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Dish" Width="auto" Binding="{Binding FoodType}" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="x2" Click="x2_Click" Content="-"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn IsReadOnly="True" Header="Dish" Width="auto" Binding="{Binding FoodType}" />
             </DataGrid.Columns>
         </DataGrid>
-        <StatusBar Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="6" Height="40" VerticalAlignment="Bottom">
+        <StatusBar Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="6" Height="40" VerticalAlignment="Bottom">
             <StatusBarItem Content="Group 7" FontSize="20" Foreground="Blue"/>
             <Button x:Name="Link" Click="Link_Click">
                 <StackPanel Orientation="Horizontal">

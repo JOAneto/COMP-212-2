@@ -43,7 +43,6 @@ namespace RestaurantPrg
             InitializeComponent();
             LoadData();
             Bill.ItemsSource = billMenu;
-            
         }
     
         public void LoadData()
@@ -204,20 +203,22 @@ namespace RestaurantPrg
         {
             Menu price = foodMenu.FirstOrDefault(r => r.Name == main.Text);
 
-            if (billMenu.Any(p => p.Name == main.Text))
-            {
+            if (main.Text != "None"){
+                if (billMenu.Any(p => p.Name == main.Text))
+                {
 
-                Menu found = billMenu.FirstOrDefault(x => x.Name == main.Text);
-                int i = billMenu.IndexOf(found);
-                billMenu[i].Quantity++;
-                Console.WriteLine(billMenu[i].Quantity);
+                    Menu found = billMenu.FirstOrDefault(x => x.Name == main.Text);
+                    int i = billMenu.IndexOf(found);
+                    billMenu[i].Quantity++;
+                    Console.WriteLine(billMenu[i].Quantity);
 
+                }
+                else
+                {
+                    billMenu.Add(new Menu() { Name = main.Text, FoodType = "Main Course", Price = price.Price, Quantity = 1 });
+                }
+                HandleTotal(price);
             }
-            else
-            {
-                billMenu.Add(new Menu() { Name = main.Text, FoodType = "Main Course", Price = price.Price, Quantity = 1 });
-            }
-            HandleTotal(price);
         }
 
         private void Bev_DropDownClosed(object sender, EventArgs e)
@@ -260,6 +261,47 @@ namespace RestaurantPrg
             total.Text = "$" + Total;
             taxText.Text = "$" + Tax;
             SubTot.Text = "$" + Subtotal;
+        }
+
+        private void Cb1_DropDownClosed(object sender, EventArgs e)
+        {
+            //Menu a = Bill.SelectedItem as Menu;
+            //int b = Bill.Columns[2].GetCellContent(dataGridRow:);
+            
+        }
+        public void HandleEdit(Menu input)
+        {
+            Tax = Subtotal * tax;
+            Total = Subtotal + Tax;
+            total.Text = "$" + Math.Round(Total, 2);
+            taxText.Text = "$" + Math.Round(Tax, 2);
+            SubTot.Text = "$" + Math.Round(Subtotal, 2);
+        }
+
+        private void x1_Click(object sender, RoutedEventArgs e)
+        {
+            Menu a = Bill.SelectedItem as Menu;
+            a.Quantity++;
+            Subtotal = Subtotal + a.Price;
+            HandleEdit(a);
+
+        }
+
+        private void x2_Click(object sender, RoutedEventArgs e)
+        {
+            Menu a = Bill.SelectedItem as Menu;
+            if (a.Quantity > 0)
+            {
+                a.Quantity--;
+                Subtotal = Subtotal - a.Price;
+                HandleEdit(a);
+
+            }
+            else if (a.Quantity == 0)
+            {
+                billMenu.Remove(a);
+            }
+
         }
     }
 }

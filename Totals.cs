@@ -11,5 +11,11 @@ namespace RestaurantPrg
         public  double Total { get; set; }
         public  double Subtotal { get; set; }
         public  double Tax { get; set; }
+        public Totals()
+        {
+            Total = 0;
+            Subtotal = 0;
+            Tax = 0;
+        }
     }
 }
