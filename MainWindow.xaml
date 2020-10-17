@@ -7,7 +7,7 @@
         xmlns:staticData="clr-namespace:RestaurantPrg"
         mc:Ignorable="d"
         FontSize="18"
-        Title="Team 7 Barbecue &amp; Grill" Height="450" Width="800">
+        Title="Team 7 Barbecue &amp; Grill" Height="480" Width="800">
     <Window.Resources>
         <staticData:quantity x:Key="quantity"/>
     </Window.Resources>
@@ -32,6 +32,7 @@
             <RowDefinition Height="20" />
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="20" />
             <RowDefinition Height="*" />
@@ -45,12 +46,14 @@
         <ComboBox x:Name="main" Grid.Column="1" Grid.Row="4" DropDownClosed="Main_DropDownClosed" />
         <TextBlock Grid.Column="3" Grid.Row="3" Text="Beverage" Padding="10" TextAlignment="Center"/>
         <ComboBox x:Name="bev" Grid.Column="3" Grid.Row="4" DropDownClosed="Bev_DropDownClosed" />
-        <TextBlock x:Name="txtTax" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="Tax" Padding="10" TextAlignment="Left" />
-        <TextBlock x:Name="taxText" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="$0" Padding="10" TextAlignment="Center" />
-        <TextBlock x:Name="txtTotal" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Text="Total: " Padding="10" TextAlignment="Left" />
-        <TextBlock x:Name="total" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Text="$0" Padding="10" TextAlignment="Center" />
+        <TextBlock x:Name="txtSubTot" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="Subtotal:" Padding="10" TextAlignment="Left" />
+        <TextBlock x:Name="SubTot" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="$0"  Padding="10" TextAlignment="Center" />
+        <TextBlock x:Name="txtTax" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Text="Tax:" Padding="10" TextAlignment="Left" />
+        <TextBlock x:Name="taxText" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Text="$0" Padding="10" TextAlignment="Center" />
+        <TextBlock x:Name="txtTotal" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="3" Text="Total: " Padding="10" TextAlignment="Left" />
+        <TextBlock x:Name="total" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="3" Text="$0" Padding="10" TextAlignment="Center" />
 
-        <Button x:Name="clearBtn" Grid.Column="1" Grid.Row="8" Content="Clear bill" Grid.ColumnSpan="3" Click="ClearBtn_Click"/>
+        <Button x:Name="clearBtn" Grid.Column="1" Grid.Row="9" Content="Clear bill" Grid.ColumnSpan="3" Click="ClearBtn_Click"/>
 
         <DataGrid AutoGenerateColumns="False" x:Name="Bill" Grid.Column="5" Grid.Row="1" Grid.RowSpan="7" Grid.ColumnSpan="2">
             <DataGrid.Columns>
@@ -71,7 +74,7 @@
                 <DataGridTextColumn Header="Dish" Width="auto" Binding="{Binding FoodType}" />
             </DataGrid.Columns>
         </DataGrid>
-        <StatusBar Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="6" Height="40" VerticalAlignment="Bottom">
+        <StatusBar Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="6" Height="40" VerticalAlignment="Bottom">
             <StatusBarItem Content="Group 7" FontSize="20" Foreground="Blue"/>
             <Button x:Name="Link" Click="Link_Click">
                 <StackPanel Orientation="Horizontal">

@@ -26,7 +26,9 @@ namespace RestaurantPrg
         private ObservableCollection<Menu> foodMenu;
         public ObservableCollection<Menu> billMenu = new ObservableCollection<Menu>() { };
         public double Total = 0;
-        public double tax = 0.13;
+        public double Tax = 0;
+        public double Subtotal = 0;
+        public double tax = 0.1;
         private const string COLLEGE_URL = "https://www.centennialcollege.ca/";
         enum FoodTypes
         {
@@ -43,7 +45,7 @@ namespace RestaurantPrg
             Bill.ItemsSource = billMenu;
             
         }
-
+    
         public void LoadData()
         {
             // ** Load menu list to ObservableCollection
@@ -133,12 +135,14 @@ namespace RestaurantPrg
                 des.Items.Add(f.Name);
             }
         }
-        public void handleTotal(Menu input)
+        public void HandleTotal(Menu input)
         {
-            double Tax = Math.Round(((Total - (Total * tax)) + (input.Price * input.Quantity)) * tax, 2);
-            Total = Math.Round(((Total - (Total*tax)) + (input.Price * input.Quantity)) + (((Total - (Total * tax)) + (input.Price * input.Quantity))*tax), 2);
-            total.Text = "$" + Total;
-            taxText.Text = "$" + Tax;
+            Tax = ((Total/1.1) + (input.Price * input.Quantity)) * tax;
+            Subtotal = (Total/1.1) + (input.Price * input.Quantity);
+            Total = Subtotal + Tax;
+            total.Text = "$" + Math.Round(Total, 2);
+            taxText.Text = "$" + Math.Round(Tax, 2);
+            SubTot.Text = "$" + Math.Round(Subtotal, 2);
         }
         /*public void handleTotal(Menu input, double qn)
         {
@@ -163,7 +167,7 @@ namespace RestaurantPrg
                 {
                     billMenu.Add(new Menu() { Name = app.Text, FoodType = "Appetizer", Price = price.Price, Quantity = 1 });
                 }
-                handleTotal(price);
+                HandleTotal(price);
                 //   Menu price = foodMenu.FirstOrDefault(r => r.Name == app.Text);
                 // billMenu.Add(price);
 
@@ -192,7 +196,7 @@ namespace RestaurantPrg
                     billMenu.Add(new Menu() { Name = des.Text, FoodType = "Dessert", Price = price.Price, Quantity = 1 });
 
                 }
-                handleTotal(price);
+                HandleTotal(price);
             }
         }
 
@@ -213,7 +217,7 @@ namespace RestaurantPrg
             {
                 billMenu.Add(new Menu() { Name = main.Text, FoodType = "Main Course", Price = price.Price, Quantity = 1 });
             }
-            handleTotal(price);
+            HandleTotal(price);
         }
 
         private void Bev_DropDownClosed(object sender, EventArgs e)
@@ -237,7 +241,7 @@ namespace RestaurantPrg
 
                     billMenu.Add(new Menu() { Name = bev.Text, FoodType = "Beverage", Price = price.Price, Quantity = 1 });
                 }
-                handleTotal(price);
+                HandleTotal(price);
 
             }
         }
@@ -249,9 +253,13 @@ namespace RestaurantPrg
 
         private void ClearBtn_Click(object sender, RoutedEventArgs e)
         {
+            Total = 0;
+            Tax = 0;
+            Subtotal = 0;
             billMenu.Clear();
-            total.Text = "$" + 0;
-            taxText.Text = "$" + 0;
+            total.Text = "$" + Total;
+            taxText.Text = "$" + Tax;
+            SubTot.Text = "$" + Subtotal;
         }
     }
 }
